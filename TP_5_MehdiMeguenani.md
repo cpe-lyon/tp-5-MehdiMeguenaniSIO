@@ -6,33 +6,33 @@
 
 Pour ajouter un disque dur sur Vsphere il faut aller dans les configuration de la VM puis ajouter un périphérique : 
 
-Photo 1 
+![ScreenShotQuestion8](./assetp5/Q1.PNG)
 
 ### 2. Vérifiez que ce nouveau disque dur est bien détecté par le système
 
 Afin de vérifier que le nouveau disque est bien détecté il faut faire la commande ``` ll /dev/sd* ``` qui va permettre d'afficher les disques détectés
-Photo2
+![ScreenShotQuestion8](./assetp5/Q2.PNG)
 
 ### 3. Partitionnez ce disque en utilisant fdisk : créez une première partition de 2 Go de type Linux (n°83), et une seconde partition de 3 Go en NTFS (n°7)
 
 Afin de faire partitioner le disk il faut dans un premier temps utilisé la commande ``` fdisk /dev/sdb ```. Appuyer sur la touche ``` n ``` puis sélectionner 
 ``` primary en appuyant sur p ``` puis il faut décider du numéro de la partition et du nombre d'espace alloué.
-Photo 3
+![ScreenShotQuestion8](./assetp5/Q3.PNG)
 
 ### 4. A ce stade, les partitions ont été créées, mais elles n’ont pas été formatées avec leur système de fichiers. A l’aide de la commande mkfs, formatez vos deux partitions ( pensez à consulter le manuel !)
 
-Photo 4
+![ScreenShotQuestion8](./assetp5/Q4.PNG)
 
 ### 5. Pourquoi la commande df -T, qui affiche le type de système de fichier des partitions, ne fonctionne-telle pas sur notre disque ?
 
 La commande df -T ne marche pas sur le disque car il n'est pas monté 
 
 ### 6. Faites en sorte que les deux partitions créées soient montées automatiquement au démarrage de la machine, respectivement dans les points de montage /data et /win (vous pourrez vous passer des UUID en raison de l’impossibilité d’effectuer des copier-coller)
-Photo 6 
+![ScreenShotQuestion8](./assetp5/Q6.PNG)
 
 ### 7. Utilisez la commande mount puis redémarrez votre VM pour valider la configuration
 
-Photo 7
+![ScreenShotQuestion8](./assetp5/Q7.PNG)
 
 ## Exercice 2. Partitionnement LVM
 
