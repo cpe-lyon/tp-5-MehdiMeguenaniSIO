@@ -38,4 +38,45 @@ Photo 7
 
 ### 1. On va réutiliser le disque de 5 Gio de l’exercice précédent. Commencez par démonter les systèmes de fichiers montés dans /data et /win s’ils sont encore montés, et supprimez les lignes correspondantes du fichier /etc/fstab
 
+Pour démonter les fichiers monté il faut effectuer les commande ``` sudo umount /win ; sudo umount /data ```. Il faut aussi supprimer les lignes écrite dans la question 6 précèdement.
+
 ### 2. Supprimez les deux partitions du disque, et créez une partition unique de type LVM
+
+Pour suprimmer les deux partition il faut utiliser la commande ``` fdisk ``` puis utiliser la lettre ``` d ``` 
+
+Photo 11
+
+Pour créer une partitio LVM il faut lui mettre le type 8 "AIX" qui est un type Logique .
+
+Photo 12
+
+
+### 3. A l’aide de la commande pvcreate, créez un volume physique LVM. Validez qu’il est bien créé, en utilisant la commande pvdisplay
+
+Afin de créer un volulme physique avec la commande il pvcreate il faut faire la commande ``` sudo pvcreate PV /dev/sdb1 ```
+
+Puis vérifier si elle a été bien créer avec ``` pvdisplay ``` 
+
+
+### 4. A l’aide de la commande vgcreate, créez un groupe de volumes, qui pour l’instant ne contiendra que le volume physique créé à l’étape précédente. Vérifiez à l’aide de la commande vgdisplay.
+
+Pour créer un groupe de volume qui ne contient que le volume créer précèdement il faut effectuer la commande suivante ``` sudo vgcreate VG1 /dev/sdb1 ```  
+
+Photo 14 
+
+### 5. Créez un volume logique appelé lvData occupant l’intégralité de l’espace disque disponible.
+
+### 6. Dans ce volume logique, créez une partition que vous formaterez en ext4, puis procédez comme dans l’exercice 1 pour qu’elle soit montée automatiquement, au démarrage de la machine, dans /data.
+
+### 7. Eteignez la VM pour ajouter un second disque (peu importe la taille pour cet exercice). Redémarrez la VM, vérifiez que le disque est bien présent. Puis, répétez les questions 2 et 3 sur ce nouveau disque.
+
+### 8. Utilisez la commande vgextend <nom_vg> <nom_pv> pour ajouter le nouveau disque au groupe de volumes
+
+Pour ajouter le nouveau disque au groupe il faut effectuer la commande ``` vgextend VG1 /dev/sdc1 ```
+Photo 18
+
+### 9. Utilisez la commande lvresize (ou lvextend) pour agrandir le volume logique. Enfin, il ne faut pas oublier de redimensionner le système de fichiers à l’aide de la commande resize2fs.
+
+Pour agrandir le volume logique il faut faire les commandes suivante ``` sudo lvresize -l +100%FREE /dev/VG1/lvDATA ; sudo resize2fs /dev/VG1/lvDATA ```
+Photo 19 
+
