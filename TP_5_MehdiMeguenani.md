@@ -72,10 +72,16 @@ Pour créer un groupe de volume qui ne contient que le volume créer précèdeme
 
 ### 6. Dans ce volume logique, créez une partition que vous formaterez en ext4, puis procédez comme dans l’exercice 1 pour qu’elle soit montée automatiquement, au démarrage de la machine, dans /data.
 
-![ScreenShotQuestion8](./assetp5/Q16.PNG)
+Pour créer la partition il faut utiliser  la commande ``` fdisk /dev/mapper/VG1-lvDATA ```
+
+![ScreenShotQuestion8](./assetp5/Q16.PNG)  
+
+Ensuite pour formater la partition il faut effectuer la commande mkfs.ext4 /dev/mapper/VG1-lvDATA
 
 ![ScreenShotQuestion8](./assetp5/Q161.PNG)
 
+Puis pour finir il faut modifier le fichier avec la commande ``` /etc/fstab ```
+ 
 ![ScreenShotQuestion8](./assetp5/Q162.PNG)
 
 ### 7. Eteignez la VM pour ajouter un second disque (peu importe la taille pour cet exercice). Redémarrez la VM, vérifiez que le disque est bien présent. Puis, répétez les questions 2 et 3 sur ce nouveau disque.
@@ -88,6 +94,7 @@ Pour ajouter le nouveau disque au groupe il faut effectuer la commande ``` vgext
 
 ### 9. Utilisez la commande lvresize (ou lvextend) pour agrandir le volume logique. Enfin, il ne faut pas oublier de redimensionner le système de fichiers à l’aide de la commande resize2fs.
 
-Pour agrandir le volume logique il faut faire les commandes suivante ``` sudo lvresize -l +100%FREE /dev/VG1/lvDATA ; sudo resize2fs /dev/VG1/lvDATA ```
+Pour agrandir le volume logique il faut faire les commandes suivante ``` sudo lvresize -l +100%FREE /dev/VG1/lvDATA ; sudo resize2fs /dev/VG1/lvDATA ```  
+
 ![ScreenShotQuestion8](./assetp5/Q19.PNG)
 
